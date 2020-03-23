@@ -1,4 +1,4 @@
-# Mr Saturn Client
+# Mr Saturn Server
 
 [Mr Saturn Client](https://github.com/m-thompson-code/mr-saturn)
 
