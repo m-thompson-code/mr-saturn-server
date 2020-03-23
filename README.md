@@ -6,10 +6,6 @@ Node.js server
 
 Uses [tmi.js](https://www.tmijs.com/) to listen to Twitch chat for channel(s) and run a bot to interact with users in response to messages in the chat. I also use [Firebase Firestore](https://firebase.google.com/docs/firestore) as a realtime database to store minimum data to update client overlay as needed.
 
-"firebase": "^7.12.0",
-    "moment": "^2.24.0",
-    "tmi.js": "^1.5.0"
-
 ## About SAMTRON5000
 
 Samantha is an old YouTube gaming content creator from 2007. Here is her [Youtube channel](https://www.youtube.com/user/samtron5000/videos).
