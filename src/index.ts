@@ -12,60 +12,6 @@ import * as moment from 'moment';
 import { firestore } from "firebase/app";
 import { getRand, substringsMatch, commandHasGreeting } from './helpers/helpers';
 
-// export interface MrSaturnSettings {
-//     font: 'random' | 'normal' | 'boing' | 'lumine hall';
-//     allowMsgsFromChat: boolean;
-//     allowMilkman: boolean;
-//     allowMonaLisa: boolean;
-//     allowOlives: boolean;
-//     allowRandomSprites: boolean;
-//     loopRandomSprites: boolean;
-    
-//     additionalSaturns: number;
-//     loopCount: number;
-//     saturnsLimit: number;
-// }
-
-// const listenForMrSaturnSettingsChanges = (): void => {
-//     firestore().collection("saturns").doc('settings').onSnapshot(docSnapshot => {
-//         if (docSnapshot.exists) {
-//             const doc = docSnapshot.data();
-
-//             if (doc) {
-//                 mrSaturnSettings = {
-//                     font: doc.font || 'normal',
-//                     allowMsgsFromChat: doc.allowMsgsFromChat || false,
-//                     allowMilkman:  doc.allowMilkman || false,
-//                     allowMonaLisa:  doc.allowMonaLisa || false,                
-//                     allowOlives:  doc.allowOlives || false,
-//                     allowRandomSprites: doc.allowRandomSprites || false,
-//                     loopRandomSprites: doc.loopRandomSprites || false,
-    
-//                     additionalSaturns: doc.additionalSaturns || 0,
-//                     loopCount: doc.loopCount || 0,
-    
-//                     saturnsLimit: doc.saturnsLimit || 0,
-//                 };
-//             }
-//         }
-//     });
-// }
-
-// let mrSaturnSettings: MrSaturnSettings = {
-//     font: 'normal',
-//     allowMsgsFromChat: false,
-//     allowMilkman: false,
-//     allowMonaLisa: false,
-//     allowOlives: false,
-//     allowRandomSprites: false,
-//     loopRandomSprites: false,
-
-//     additionalSaturns: 0,
-//     loopCount: 0,
-
-//     saturnsLimit: 0,
-// };
-
 // Create a client with using the twitchCerts from secrets and CHANNEL_NAMES from configs
 const tmiClient = tmi.client({
     identity: {
@@ -78,9 +24,6 @@ const tmiClient = tmi.client({
 const main = async(): Promise<void> => {
     // Inintalize Firebase and import any services we want (firestore, auth)
     await firebaseInit();
-
-    // // Listen for any changes that happen to settings (will also initialize it)
-    // listenForMrSaturnSettingsChanges();
 
     // Display when connected
     tmiClient.on('connected', (addr: string, port: number): void => {
@@ -121,9 +64,12 @@ const sandwichCommand = async(command: string, channel: string, context: tmi.Cha
 
 const diceCommand = async(command: string, channel: string): Promise<void> => {
     const seed = +(command.substring(2));
-    tmiClient.say(channel, "" + (Math.floor(Math.random() * seed) + 1));
 
-    console.log(`* Executed ${command} command (dice)`, moment().format('LL LTS'));
+    if (seed > 0) {
+        tmiClient.say(channel, "" + (Math.floor(Math.random() * seed) + 1));
+
+        console.log(`* Executed ${command} command (dice)`, moment().format('LL LTS'));
+    }
 }
 
 const botGreetingCommand = async(command: string, channel: string, context: tmi.ChatUserstate): Promise<void> => {
