@@ -3,6 +3,7 @@
 # Ignore the secrets
 /secrets
 /src/secrets
+/src/secrets/secrets.ts
 
 # Firebase hosting cache files
 .firebase/*
