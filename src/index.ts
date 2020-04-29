@@ -12,13 +12,19 @@ import * as moment from 'moment';
 import { firestore } from "firebase/app";
 import { getRand, substringsMatch, commandHasGreeting } from './helpers/helpers';
 
+let _channel_names = CHANNEL_NAMES || process.env.CHANNEL_NAMES;
+
+if (typeof _channel_names === 'string') {
+    _channel_names = _channel_names.split(',');
+}
+
 // Create a client with using the twitchCerts from secrets and CHANNEL_NAMES from configs
 const tmiClient = tmi.client({
     identity: {
-        username: twitchCerts.BOT_USERNAME,
-        password: twitchCerts.OAUTH_TOKEN,
+        username: twitchCerts?.BOT_USERNAME || process.env.BOT_USERNAME,
+        password: twitchCerts?.OAUTH_TOKEN || process.env.OAUTH_TOKEN,
     },
-    channels: CHANNEL_NAMES,
+    channels: _channel_names,
 });
 
 const main = async(): Promise<void> => {
