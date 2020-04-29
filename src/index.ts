@@ -82,30 +82,42 @@ const botGreetingCommand = async(command: string, channel: string, context: tmi.
     console.log(`* Executed ${command} command (bot greetings)`, moment().format('LL LTS'));
 }
 
-const storeLoveQuote = async(context: tmi.ChatUserstate, msg: string) => {
+const storeLoveQuote = async(context: tmi.ChatUserstate, msg: string): Promise<string> => {
     const rand = getRand();
 
-    await firestore().collection("love").add({
+    const id = await firestore().collection("love").add({
         context: context,
         rand: rand,
         msg: msg
+    }).then(docRef => {
+        console.log(" * Stored love quote in firebase", rand, docRef.id);
+        return rand;
     });
+
+    return id;
 }
 
-const getRandomLoveQuote = async(): Promise<string | undefined> => {
-    const rand = getRand();
+const getRandomLoveQuote = async(rand?: string): Promise<{id: string, quote: string} | undefined> => {
+    const _rand = rand || getRand();
+    console.log(' ~ love seed', rand, '->', _rand);
 
-    const _querySnapshot_1 = await firestore().collection("love").where("rand", ">=", rand).get();
+    const _querySnapshot_1 = await firestore().collection("love").where("rand", ">=", _rand).get();
     if (_querySnapshot_1 && _querySnapshot_1.size) {
         const data = _querySnapshot_1.docs[0].data();
 
-        return `${data.msg} - ${data.context['display-name']}`;
+        return {
+            id: data.rand,
+            quote: `${data.msg} - ${data.context['display-name']}`,
+        };
     } else {
-        const _querySnapshot_2 = await firestore().collection("love").where("rand", "<=", rand).get();
+        const _querySnapshot_2 = await firestore().collection("love").where("rand", "<=", _rand).get();
         if (_querySnapshot_2 && _querySnapshot_2.size) {
             const data = _querySnapshot_2.docs[0].data();
 
-            return `${data.msg} - ${data.context['display-name']}`;
+            return {
+                id: data.rand,
+                quote: `${data.msg} - ${data.context['display-name']}`,
+            };
         }
     }
 
@@ -150,12 +162,15 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
     // Check if command starts with 'love is'
     if (command.indexOf('love is') === 0) {
         // Store the message if it does
-        await storeLoveQuote(context, msg);
-        console.log(" * Stored love quote", context, msg);
+        const id = await storeLoveQuote(context, msg);
+        console.log(" * Stored love quote", context["display-name"], id, msg);
+        tmiClient.say(channel, ` * Stored love quote ~love #${id}~`);
         return;
     }
 
-    const loveQuote = await getRandomLoveQuote();
+    const id = command.split('love #')[1];
+
+    const loveQuote = await getRandomLoveQuote(id);
 
     if (loveQuote) {
         // If command includes love or command is a subset of loveQuote (or vice versa)
@@ -165,20 +180,27 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
                 const split = CHANNEL_NAME.split('#');
                 const channel = split[split.length - 1];
 
-                tmiClient.say(channel, loveQuote);
+                tmiClient.say(channel, `${loveQuote.quote}`);
 
-                console.log(`* Executed ${command} command (get love quote 1)`, moment().format('LL LTS'));
+                console.log(`* Executed ${command} command (get love quote 1) ~#${loveQuote.id}~`, moment().format('LL LTS'));
             }
-        }
-
-        if (substringsMatch(loveQuote, command)) {
+        } else if (substringsMatch(loveQuote.quote, command)) {
             for (let CHANNEL_NAME of CHANNEL_NAMES) {
                 const split = CHANNEL_NAME.split('#');
                 const channel = split[split.length - 1];
 
-                tmiClient.say(channel, loveQuote);
+                tmiClient.say(channel, `${loveQuote.quote}`);
 
-                console.log(`* Executed ${command} command (get love quote 2)`, moment().format('LL LTS'));
+                console.log(`* Executed ${command} command (get love quote 2) ~#${loveQuote.id}~`, moment().format('LL LTS'));
+            }
+        } else if (command.includes(loveQuote.id)) {
+            for (let CHANNEL_NAME of CHANNEL_NAMES) {
+                const split = CHANNEL_NAME.split('#');
+                const channel = split[split.length - 1];
+
+                tmiClient.say(channel, `${loveQuote.quote}`);
+
+                console.log(`* Executed ${command} command (get love quote 3) ~#${loveQuote.id}~`, moment().format('LL LTS'));
             }
         }
     }
