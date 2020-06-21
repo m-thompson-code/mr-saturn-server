@@ -113,7 +113,7 @@ const getRandomLoveQuote = async(rand?: string): Promise<{id: string, quote: str
 
         return {
             id: data.rand,
-            quote: `${data.msg} - ${data.context['display-name']}`,
+            quote: `${data.msg} - ${data.context && data.context['display-name'] || 'unknown display-name'}`,
         };
     } else {
         const _querySnapshot_2 = await firestore().collection("love").where("rand", "<=", _rand).get();
@@ -122,13 +122,46 @@ const getRandomLoveQuote = async(rand?: string): Promise<{id: string, quote: str
 
             return {
                 id: data.rand,
-                quote: `${data.msg} - ${data.context['display-name']}`,
+                quote: `${data.msg} - ${data.context && data.context['display-name'] || 'unknown display-name'}`,
             };
         }
     }
 
     return undefined;
 }
+
+const getLoveQuoteByID = async(loveID: string): Promise<{id: string, quote: string} | undefined> => {
+    console.log(' ~ getLoveQuoteByID', loveID);
+
+    const _querySnapshot = await firestore().collection("love").where("rand", "==", loveID).get();
+
+    if (_querySnapshot && _querySnapshot.size) {
+        const data = _querySnapshot.docs[0].data();
+
+        return {
+            id: data.rand,
+            quote: `${data.msg} - ${data.context && data.context['display-name'] || 'unknown display-name'}`,
+        };
+    }
+
+    return undefined;
+}
+
+const deleteLoveQuoteByID = async(loveID: string): Promise<boolean> => {
+    console.log(' ~ deleteLoveQuoteByID', loveID);
+
+    const _querySnapshot = await firestore().collection("love").where("rand", "==", loveID).get();
+
+    let deleted = false;
+    _querySnapshot.forEach((doc) => {
+        doc.ref.delete();
+        deleted = true;
+    });
+
+    return deleted;
+}
+
+let lastLoveID: null | string = null;
 
 // Called every time a message comes in
 const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: string, self: boolean) => void = async(channel: string, context: tmi.ChatUserstate, rawMsg: string, self: boolean) => {
@@ -139,7 +172,85 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
     const msg = (rawMsg || "").trim();
     const command = msg.toLowerCase();
 
-    console.log(" * Message: ", context['display-name'], `(${context.username})`, rawMsg);
+    console.log(" * Message: ", context && context['display-name'] || 'unknown display-name', `(${context && context.username || 'unknown username'})`, rawMsg);
+
+    if (command.includes('moo command')) {
+        for (let CHANNEL_NAME of CHANNEL_NAMES) {
+            const split = CHANNEL_NAME.split('#');
+            const channel = split[split.length - 1];
+
+            tmiClient.say(channel, `olive x<#> | milkman | sandwich | mona lisa | !d<#> | love is <rest of the quote> | what is love? | memory id | memory quote <memory id> | forget memory <memory id>`);
+
+            console.log(`* Executed ${command} command (moo commands) ~`, moment().format('LL LTS'));
+        }
+    }
+
+    if (command.includes('memory quote') || command.includes('love quote')) {
+        const parts = command.split(' ');
+
+        const loveID = parts[parts.length - 1];
+
+        const _q = await getLoveQuoteByID(loveID);
+
+        if (_q && _q.quote) {
+            for (let CHANNEL_NAME of CHANNEL_NAMES) {
+                const split = CHANNEL_NAME.split('#');
+                const channel = split[split.length - 1];
+
+                tmiClient.say(channel, `${_q.quote}`);
+                lastLoveID = _q.id;
+    
+                console.log(`* Executed ${command} command (memory quote) ~#${loveID}~ 200`, moment().format('LL LTS'));
+            }
+        } else {
+            console.log(`* Executed ${command} command (memory quote) ~#${loveID}~ 404`, moment().format('LL LTS'));
+        }
+
+        return Promise.resolve();
+    }
+
+    if (command.includes('forget memory') || command.includes('forget love')) {
+        console.log(context);
+        // moomoomamoo - '36547695'
+        if (!context || (!context.mod && context['user-id'] !== '36547695')) {
+            console.warn(" ~ forgot memory canceled since not mod context");
+            return Promise.resolve();
+        }
+
+        const parts = command.split(' ');
+
+        const loveID = parts[parts.length - 1];
+
+        await deleteLoveQuoteByID(loveID);
+
+        if (loveID) {
+            for (let CHANNEL_NAME of CHANNEL_NAMES) {
+                const split = CHANNEL_NAME.split('#');
+                const channel = split[split.length - 1];
+    
+                tmiClient.say(channel, `forgot love quote id ${loveID}`);
+    
+                console.log(`* Executed ${command} command (forgot love id) ~#${loveID}~`, moment().format('LL LTS'));
+            }
+        }
+
+        return Promise.resolve();
+    }
+
+    if (command.includes('memory id') || command.includes('love id') || command.includes('quote id')) {
+        // if (lastLoveID) {
+            for (let CHANNEL_NAME of CHANNEL_NAMES) {
+                const split = CHANNEL_NAME.split('#');
+                const channel = split[split.length - 1];
+    
+                tmiClient.say(channel, `last memory quote id ${lastLoveID || '<none>'}`);
+    
+                console.log(`* Executed ${command} command (love id) ~#${lastLoveID}~`, moment().format('LL LTS'));
+            }
+        // }
+
+        return Promise.resolve();
+    }
 
     // If the command is known, let's execute it
     if (command.includes('milk')) {
@@ -159,8 +270,8 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
         await firestore().collection("saturns").doc('chat').set({
             timestamp: Date.now(),
             msg: msg || "",
-            'display-name': context['display-name'] || "",
-            username: context.username || "",
+            'display-name': context && context['display-name'] || 'unknown display-name',
+            username: context && context.username || 'unknown username',
             context: context || null,
         });
     }
@@ -169,7 +280,7 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
     if (command.indexOf('love is') === 0) {
         // Store the message if it does
         const id = await storeLoveQuote(context, msg);
-        console.log(" * Stored love quote", context["display-name"], id, msg);
+        console.log(" * Stored love quote", context && context["display-name"] || 'unknown display-name', id, msg);
         tmiClient.say(channel, ` * Stored love quote ~love #${id}~`);
         return;
     }
@@ -187,6 +298,7 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
                 const channel = split[split.length - 1];
 
                 tmiClient.say(channel, `${loveQuote.quote}`);
+                lastLoveID = loveQuote.id;
 
                 console.log(`* Executed ${command} command (get love quote 1) ~#${loveQuote.id}~`, moment().format('LL LTS'));
             }
@@ -196,6 +308,7 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
                 const channel = split[split.length - 1];
 
                 tmiClient.say(channel, `${loveQuote.quote}`);
+                lastLoveID = loveQuote.id;
 
                 console.log(`* Executed ${command} command (get love quote 2) ~#${loveQuote.id}~`, moment().format('LL LTS'));
             }
@@ -205,6 +318,7 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
                 const channel = split[split.length - 1];
 
                 tmiClient.say(channel, `${loveQuote.quote}`);
+                lastLoveID = loveQuote.id;
 
                 console.log(`* Executed ${command} command (get love quote 3) ~#${loveQuote.id}~`, moment().format('LL LTS'));
             }

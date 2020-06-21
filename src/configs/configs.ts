@@ -1,7 +1,7 @@
 export const CHANNEL_NAMES: string[] | string = [
     "moomoomamoo", 
-    "samtron5000",
-    "btgplay",
+    // "samtron5000",
+    // "btgplay",
 ];
 
 // moomoomamoo,samtron5000,btgplay
