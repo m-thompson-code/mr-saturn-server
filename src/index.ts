@@ -39,6 +39,10 @@ const main = async(): Promise<void> => {
     // Register our on message event handler
     tmiClient.on('message', onMessageHandler);
 
+    setTimeout(() => {
+        periodicPrompt();
+    }, 30 * 1000 * 60);
+
     // Connect to Twitch
     tmiClient.connect();
 }
@@ -161,7 +165,30 @@ const deleteLoveQuoteByID = async(loveID: string): Promise<boolean> => {
     return deleted;
 }
 
+const periodicPrompt = (): void => {
+    for (let CHANNEL_NAME of CHANNEL_NAMES) {
+        const split = CHANNEL_NAME.split('#');
+        const channel = split[split.length - 1];
+
+        tmiClient.say(channel, `Hey chat! Teach me what love is by typing "Love is <insert the rest of the quote>". What is love?`);
+
+        console.log(`* Executed periodicPrompt ~`, moment().format('LL LTS'));
+    }
+
+    setTimeout(() => {
+        periodicPrompt();
+    }, 30 * 1000 * 60 + Math.random() * 30 * 1000 * 60);
+}
+
 let lastLoveID: null | string = null;
+
+const updateJumpScareTimestamp = (): Promise<void> => {
+    console.log(" ~ updateJumpScareTimestamp called");
+
+    return firestore().collection("saturns").doc('settings').update({
+        jumpScareTimestamp: Date.now() + 1000 * 60 * 60 * 1,// 1 hour
+    });
+}
 
 // Called every time a message comes in
 const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: string, self: boolean) => void = async(channel: string, context: tmi.ChatUserstate, rawMsg: string, self: boolean) => {
@@ -174,15 +201,26 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
 
     console.log(" * Message: ", context && context['display-name'] || 'unknown display-name', `(${context && context.username || 'unknown username'})`, rawMsg);
 
+    const parts = command.split(' ');
+    for (const part of parts) {
+        if (part === 'hate' || part === 'help' || part === 'dislike' || part === "don't" || part === "never" || part === "heart") {
+            setTimeout(() => {
+                updateJumpScareTimestamp();
+            }, 15 * 1000);
+        }
+    }
+
     if (command.includes('moo command')) {
         for (let CHANNEL_NAME of CHANNEL_NAMES) {
             const split = CHANNEL_NAME.split('#');
             const channel = split[split.length - 1];
 
-            tmiClient.say(channel, `olive x<#> | milkman | sandwich | mona lisa | !d<#> | love is <rest of the quote> | what is love? | memory id | memory quote <memory id> | forget memory <memory id>`);
+            tmiClient.say(channel, `olive x<#> | clear olives | milkman | sandwich | mona lisa | !d<#> | love is <rest of the quote> | what is love? | memory id | memory quote <memory id> | forget memory <memory id>`);
 
             console.log(`* Executed ${command} command (moo commands) ~`, moment().format('LL LTS'));
         }
+
+        return Promise.resolve();
     }
 
     if (command.includes('memory quote') || command.includes('love quote')) {
@@ -209,8 +247,7 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
         return Promise.resolve();
     }
 
-    if (command.includes('forget memory') || command.includes('forget love')) {
-        console.log(context);
+    if (command.startsWith('forget memory') || command.startsWith('forget love')) {
         // moomoomamoo - '36547695'
         if (!context || (!context.mod && context['user-id'] !== '36547695')) {
             console.warn(" ~ forgot memory canceled since not mod context");
@@ -289,6 +326,9 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
 
     const loveQuote = await getRandomLoveQuote(id);
 
+    // Only 1 in 3 chance to spawn "relatable" love quote
+    const _otherSeed = Math.floor(Math.random() * 3);
+
     if (loveQuote) {
         // If command includes love or command is a subset of loveQuote (or vice versa)
         // Say love quote
@@ -302,7 +342,7 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
 
                 console.log(`* Executed ${command} command (get love quote 1) ~#${loveQuote.id}~`, moment().format('LL LTS'));
             }
-        } else if (substringsMatch(loveQuote.quote, command)) {
+        } else if (_otherSeed === 0 && substringsMatch(loveQuote.quote, command)) {
             for (let CHANNEL_NAME of CHANNEL_NAMES) {
                 const split = CHANNEL_NAME.split('#');
                 const channel = split[split.length - 1];
