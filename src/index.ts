@@ -92,6 +92,55 @@ const botGreetingCommand = async(command: string, channel: string, context: tmi.
     console.log(`* Executed ${command} command (bot greetings)`, moment().format('LL LTS'));
 }
 
+const botRPSCommand = async(command: string, channel: string, context: tmi.ChatUserstate): Promise<void> => {
+    console.log(`* Executed ${command} command (rps)`, moment().format('LL LTS'));
+
+    const msg = command.trim().toLowerCase();
+
+    let request: 'paper' | 'sizzors' | 'rock' = 'paper';
+
+    if (msg.includes('rock')) {
+        request = 'rock';
+    } else if (msg.includes('sizzor')) {
+        request = 'sizzors';
+    }
+
+    const person = context && (context['display-name'] || context.username) || "Someone";
+
+    const _seed = Math.floor(Math.random() * 15);
+
+    if (_seed === 0) {
+        tmiClient.say(channel, `@${person} choose ${request}. I chose rocket launcher. Looks like I win! Haha`);
+        return;
+    } else if (_seed === 1) {
+        tmiClient.say(channel, `@${person} choose ${request}. I tried to use the 3rd option but got undefined instead. You win!`);
+        return;
+    } else if (_seed === 2) {
+        tmiClient.say(channel, `@${person} choose ${request}. Why not choose love? What's love to you?`);
+        return;
+    }
+
+    const seed = Math.floor(Math.random() * 3);
+
+    const options: ('paper' | 'sizzors' | 'rock')[] = ['paper', 'sizzors', 'rock'];
+
+    const response: 'paper' | 'sizzors' | 'rock' = options[seed];
+
+    if (request === response) {
+        tmiClient.say(channel, `@${person} choose ${request}. I chose ${response}. Looks like a draw.`);
+    } else if (request === 'paper' && response === 'rock') {
+        tmiClient.say(channel, `@${person} choose ${request}. I chose ${response}. Looks like you win...`);
+    } else if (request === 'rock' && response === 'sizzors') {
+        tmiClient.say(channel, `@${person} choose ${request}. I chose ${response}. Looks like you win...`);
+    } else if (request === 'sizzors' && response === 'paper') {
+        tmiClient.say(channel, `@${person} choose ${request}. I chose ${response}. Looks like you win...`);
+    } else {
+        tmiClient.say(channel, `@${person} choose ${request}. I chose ${response}. Looks like I win!`);
+    }
+
+    console.log(`* Executed ${command} command (rps)`, moment().format('LL LTS'));
+}
+
 const storeLoveQuote = async(context: tmi.ChatUserstate, msg: string): Promise<string> => {
     const rand = getRand();
 
@@ -198,10 +247,10 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
     // Remove whitespace from chat message
     const msg = (rawMsg || "").trim();
     const command = msg.toLowerCase();
+    const parts = command.split(' ');
 
     console.log(" * Message: ", context && context['display-name'] || 'unknown display-name', `(${context && context.username || 'unknown username'})`, rawMsg);
 
-    const parts = command.split(' ');
     for (const part of parts) {
         if (part === 'hate' || part === 'help' || part === 'dislike' || part === "don't" || part === "never" || part === "heart") {
             setTimeout(() => {
@@ -290,7 +339,9 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
     }
 
     // If the command is known, let's execute it
-    if (command.includes('milk')) {
+    if (parts.includes('paper') || parts.includes('rock') || parts.includes('sizzor')) {
+        await botRPSCommand(command, channel, context);
+    } else if (command.includes('milk')) {
         await milkManCommand(command, channel, context);
     } else if (command.includes('sandwich') || command.includes('sammich')) {
         await sandwichCommand(command, channel, context);
