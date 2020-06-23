@@ -1,3 +1,17 @@
 export { alteringCave } from './altering_cave';
 export { berryForest } from './berry_forest';
 export { bondBridge } from './bond_bridge';
+export { canyonEntrance } from './canyon_entrance';
+export { capeBrink } from './cape_brink';
+export { ceruleanCave1F } from './cerulean_cave_1f';
+export { ceruleanCave2F } from './cerulean_cave_2f';
+export { ceruleanCaveB1F } from './cerulean_cave_b1f';
+export { diglettsCave } from './digletts_cave';
+export { fiveIsland } from './five_island';
+export { fiveIsleMeadow } from './five_isle_meadow';
+export { fourIsland } from './four_island';
+export { fuchsiaCity } from './fuchsia_city';
+export { greenPath } from './green_path';
+export { icefallCave } from './icefall_cave';
+export { kindleRoad } from './kindle_road';
+export { powerPlant } from './power_plant';

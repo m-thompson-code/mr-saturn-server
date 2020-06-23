@@ -1,6 +1,6 @@
 import { PokemonLocationData } from "../../locations";
 
-export const alteringCave: PokemonLocationData = {
+export const kindleRoad: PokemonLocationData = {
     catchMap: {
         Cave: {
             Zubat: {
@@ -13,6 +13,7 @@ export const alteringCave: PokemonLocationData = {
         }
     },
     connections: [
-        "Outcast Island",
+        "Mt. Ember",
+        "One Island",
     ],
 };
