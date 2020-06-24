@@ -1,21 +1,14 @@
 import { PokemonLocationData } from "../../locations";
 
-export const resortGorgeous: PokemonLocationData = {
+export const cinnabarIsland: PokemonLocationData = {
     catchMap: {
         Surfing: {
-            "Tentacool": {
+            Tentacool: {
                 inFireRed: true,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 40,
-                rate: 65,
-            },
-            "Tentacruel": {
-                inFireRed: true,
-                inLeafGreen: true,
-                minLevel: 35,
-                maxLevel: 40,
-                rate: 35,
+                rate: 100,
             },
         },
         "Old Rod": {
@@ -27,20 +20,20 @@ export const resortGorgeous: PokemonLocationData = {
                 rate: 100,
             },
         },
-        "Good Rod": {
+        "Good Rod": {// Mixing versions
             Horsea: {
                 inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 5,
-                maxLevel: 15,
-                rate: 80,
-            },
-            Krabby: {
-                inFireRed: false,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 15,
-                rate: 80,
+                rate: 40,
+            },
+            Krabby: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 5,
+                maxLevel: 15,
+                rate: 40,
             },
             Magikarp: {
                 inFireRed: true,
@@ -93,7 +86,7 @@ export const resortGorgeous: PokemonLocationData = {
                 maxLevel: 35,
                 rate: 4,
             },
-            Kingler: {
+            Slowbro: {
                 inFireRed: false,
                 inLeafGreen: true,
                 minLevel: 25,
@@ -117,7 +110,8 @@ export const resortGorgeous: PokemonLocationData = {
         }
     },
     connections: [
-        "Lost Cave",
-        "Water Labyrinth",
+        "Route 21",
+        "Route 20",
+        "Pokemon Mansion 1F",
     ],
 };

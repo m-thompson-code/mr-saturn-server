@@ -1,6 +1,6 @@
 import { PokemonLocationData } from "../../locations";
 
-export const mtMoon1F: PokemonLocationData = {
+export const mtEmber: PokemonLocationData = {
     catchMap: {
         Cave: {// Ignoring the actual Cave section and replacing it with its Grass area
             Spearow: {// Treating LG as both versions since we have conflicting rates for the same pokemon and LG includes more pokemon

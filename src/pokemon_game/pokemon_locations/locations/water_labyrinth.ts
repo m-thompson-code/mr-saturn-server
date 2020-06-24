@@ -1,6 +1,6 @@
 import { PokemonLocationData } from "../../locations";
 
-export const resortGorgeous: PokemonLocationData = {
+export const waterLabyrinth: PokemonLocationData = {
     catchMap: {
         Surfing: {
             "Tentacool": {
@@ -117,7 +117,7 @@ export const resortGorgeous: PokemonLocationData = {
         }
     },
     connections: [
-        "Lost Cave",
-        "Water Labyrinth",
+        "Resort Gorgeous",
+        "Five Island",
     ],
 };

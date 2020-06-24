@@ -90,5 +90,7 @@ export const fourIsland: PokemonLocationData = {
     },
     connections: [
         "Icefall Cave",
+        "Vermilion City",
+        "Five Island",
     ],
 };

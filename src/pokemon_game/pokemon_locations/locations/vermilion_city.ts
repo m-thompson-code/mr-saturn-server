@@ -1,21 +1,24 @@
 import { PokemonLocationData } from "../../locations";
 
-export const resortGorgeous: PokemonLocationData = {
+export const vermilionCity: PokemonLocationData = {
     catchMap: {
+        Special: {
+            "Farfetch'd": {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 5,
+                maxLevel: 35,
+                rate: 100,
+                note: "You're supposed to trade for this pokemon, but to make it simple, it's a gift"
+            }
+        },
         Surfing: {
             "Tentacool": {
                 inFireRed: true,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 40,
-                rate: 65,
-            },
-            "Tentacruel": {
-                inFireRed: true,
-                inLeafGreen: true,
-                minLevel: 35,
-                maxLevel: 40,
-                rate: 35,
+                rate: 100,
             },
         },
         "Old Rod": {
@@ -30,17 +33,17 @@ export const resortGorgeous: PokemonLocationData = {
         "Good Rod": {
             Horsea: {
                 inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 5,
-                maxLevel: 15,
-                rate: 80,
-            },
-            Krabby: {
-                inFireRed: false,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 15,
-                rate: 80,
+                rate: 40,
+            },
+            Krabby: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 5,
+                maxLevel: 15,
+                rate: 40,
             },
             Magikarp: {
                 inFireRed: true,
@@ -51,6 +54,20 @@ export const resortGorgeous: PokemonLocationData = {
             },
         },
         "Super Rod": {
+            Psyduck: {
+                inFireRed: true,
+                inLeafGreen: false,
+                minLevel: 25,
+                maxLevel: 35,
+                rate: 1,
+            },
+            Slowpoke: {
+                inFireRed: false,
+                inLeafGreen: true,
+                minLevel: 25,
+                maxLevel: 35,
+                rate: 1,
+            },
             Shellder: {
                 inFireRed: true,
                 inLeafGreen: false,
@@ -58,19 +75,19 @@ export const resortGorgeous: PokemonLocationData = {
                 maxLevel: 25,
                 rate: 40,
             },
-            Horsea: {
+            Horsea: {// Mixing rates for both versions
                 inFireRed: true,
                 inLeafGreen: false,
                 minLevel: 15,
                 maxLevel: 25,
-                rate: 40,
+                rate: 22,
             },
             Krabby: {
                 inFireRed: false,
                 inLeafGreen: true,
                 minLevel: 15,
                 maxLevel: 25,
-                rate: 40,
+                rate: 22,
             },
             Staryu: {
                 inFireRed: false,
@@ -86,38 +103,17 @@ export const resortGorgeous: PokemonLocationData = {
                 maxLevel: 25,
                 rate: 15,
             },
-            Seadra: {
-                inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 25,
-                maxLevel: 35,
-                rate: 4,
-            },
-            Kingler: {
-                inFireRed: false,
-                inLeafGreen: true,
-                minLevel: 25,
-                maxLevel: 35,
-                rate: 4,
-            },
-            Psyduck: {
-                inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 25,
-                maxLevel: 35,
-                rate: 1,
-            },
-            Slowpoke: {
-                inFireRed: false,
-                inLeafGreen: true,
-                minLevel: 25,
-                maxLevel: 35,
-                rate: 1,
-            },
         }
     },
     connections: [
-        "Lost Cave",
-        "Water Labyrinth",
+        "One Island",
+        "Two Island",
+        "Three Island",
+        "Four Island",
+        "Five Island",
+        "Six Island",
+        "Seven Island",
+        "Route 6",
+        "Route 11",
     ],
 };

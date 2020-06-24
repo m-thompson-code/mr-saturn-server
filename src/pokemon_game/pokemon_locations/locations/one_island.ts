@@ -119,5 +119,8 @@ export const oneIsland: PokemonLocationData = {
     connections: [
         "Kindle Road",
         "Treasure Beach",
+        "Two Island",
+        "Three Island",
+        "Vermilion City",
     ],
 };

@@ -1,5 +1,8 @@
 import { PokemonLocationData } from "../../locations";
 
+// Note that this PokemonData is not used directly
+// It is imported by route2Pewter and route2Viridian
+// This is because Viridian Forest seperates route 2
 export const route2: PokemonLocationData = {
     catchMap: {
         Grass: {
@@ -37,5 +40,6 @@ export const route2: PokemonLocationData = {
         "Viridian City",
         "Pewter City",
         "Diglett's Cave",
+        "Viridian Forest",
     ],
 };

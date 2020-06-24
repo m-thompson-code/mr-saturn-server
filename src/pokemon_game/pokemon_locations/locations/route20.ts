@@ -98,5 +98,6 @@ export const route20: PokemonLocationData = {
     connections: [
         "Route 19",
         "Cinnabar Island",
+        "Seafoam Islands 1F",
     ],
 };

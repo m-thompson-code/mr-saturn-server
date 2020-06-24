@@ -1,10 +1,9 @@
 import { PokemonLocationData } from "../../locations";
 
-export const pewterCity: PokemonLocationData = {
+export const threeIslePort: PokemonLocationData = {
     catchMap: {
     },
     connections: [
-        "Route 2 (Pewter)",
-        "Route 3",
+        "Three Island",
     ],
 };

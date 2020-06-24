@@ -1,7 +1,58 @@
 import { PokemonLocationData } from "../../locations";
 
-export const resortGorgeous: PokemonLocationData = {
+export const treasureBeach: PokemonLocationData = {
     catchMap: {
+        Grass: {
+            Spearow: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 31,
+                maxLevel: 32,
+                rate: 30,
+            },
+            Fearow: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 36,
+                maxLevel: 40,
+                rate: 20,
+            },
+            Meowth: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 31,
+                maxLevel: 31,
+                rate: 10,
+            },
+            Persian: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 37,
+                maxLevel: 40,
+                rate: 5,
+            },
+            Psyduck: {
+                inFireRed: true,
+                inLeafGreen: false,
+                minLevel: 31,
+                maxLevel: 31,
+                rate: 5,
+            },
+            Slowpoke: {
+                inFireRed: false,
+                inLeafGreen: true,
+                minLevel: 31,
+                maxLevel: 31,
+                rate: 5,
+            },
+            Tangela: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 33,
+                maxLevel: 35,
+                rate: 30,
+            },
+        },
         Surfing: {
             "Tentacool": {
                 inFireRed: true,
@@ -117,7 +168,6 @@ export const resortGorgeous: PokemonLocationData = {
         }
     },
     connections: [
-        "Lost Cave",
-        "Water Labyrinth",
+        "One Island",
     ],
 };

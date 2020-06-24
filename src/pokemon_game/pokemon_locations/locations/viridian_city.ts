@@ -1,21 +1,21 @@
 import { PokemonLocationData } from "../../locations";
 
-export const resortGorgeous: PokemonLocationData = {
+export const viridianCity: PokemonLocationData = {
     catchMap: {
         Surfing: {
-            "Tentacool": {
+            Psyduck: {
                 inFireRed: true,
-                inLeafGreen: true,
-                minLevel: 5,
+                inLeafGreen: false,
+                minLevel: 20,
                 maxLevel: 40,
-                rate: 65,
+                rate: 100,
             },
-            "Tentacruel": {
-                inFireRed: true,
+            Slowpoke: {
+                inFireRed: false,
                 inLeafGreen: true,
-                minLevel: 35,
+                minLevel: 20,
                 maxLevel: 40,
-                rate: 35,
+                rate: 100,
             },
         },
         "Old Rod": {
@@ -28,19 +28,19 @@ export const resortGorgeous: PokemonLocationData = {
             },
         },
         "Good Rod": {
-            Horsea: {
+            Poliwag: {
                 inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 5,
-                maxLevel: 15,
-                rate: 80,
-            },
-            Krabby: {
-                inFireRed: false,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 15,
-                rate: 80,
+                rate: 60,
+            },
+            Goldeen: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 5,
+                maxLevel: 15,
+                rate: 20,
             },
             Magikarp: {
                 inFireRed: true,
@@ -51,32 +51,18 @@ export const resortGorgeous: PokemonLocationData = {
             },
         },
         "Super Rod": {
-            Shellder: {
+            Goldeen: {
                 inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
-            },
-            Horsea: {
-                inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
-            },
-            Krabby: {
-                inFireRed: false,
                 inLeafGreen: true,
                 minLevel: 15,
                 maxLevel: 25,
                 rate: 40,
             },
-            Staryu: {
-                inFireRed: false,
+            Seaking: {
+                inFireRed: true,
                 inLeafGreen: true,
-                minLevel: 15,
-                maxLevel: 25,
+                minLevel: 20,
+                maxLevel: 30,
                 rate: 40,
             },
             Gyarados: {
@@ -86,38 +72,25 @@ export const resortGorgeous: PokemonLocationData = {
                 maxLevel: 25,
                 rate: 15,
             },
-            Seadra: {
-                inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 25,
-                maxLevel: 35,
-                rate: 4,
-            },
-            Kingler: {
-                inFireRed: false,
-                inLeafGreen: true,
-                minLevel: 25,
-                maxLevel: 35,
-                rate: 4,
-            },
             Psyduck: {
                 inFireRed: true,
                 inLeafGreen: false,
-                minLevel: 25,
+                minLevel: 15,
                 maxLevel: 35,
-                rate: 1,
+                rate: 5,
             },
             Slowpoke: {
                 inFireRed: false,
                 inLeafGreen: true,
-                minLevel: 25,
+                minLevel: 15,
                 maxLevel: 35,
-                rate: 1,
+                rate: 5,
             },
-        }
+        },
     },
     connections: [
-        "Lost Cave",
-        "Water Labyrinth",
+        "Route 1",
+        "Route 2 (Viridian)",
+        "Route 22",
     ],
 };

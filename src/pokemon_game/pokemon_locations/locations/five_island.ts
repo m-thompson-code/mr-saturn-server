@@ -15,7 +15,7 @@ export const fiveIsland: PokemonLocationData = {
                 inLeafGreen: true,
                 minLevel: 35,
                 maxLevel: 40,
-                rate: 5,
+                rate: 35,
             },
         },
         "Old Rod": {
@@ -120,5 +120,7 @@ export const fiveIsland: PokemonLocationData = {
         "Water Labyrinth",
         "Five Isle Meadow",
         "Lost Cave",
+        "Vermilion City",
+        "Four Island",
     ],
 };

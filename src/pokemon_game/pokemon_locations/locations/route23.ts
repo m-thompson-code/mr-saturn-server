@@ -148,7 +148,7 @@ export const route23: PokemonLocationData = {
     },
     connections: [
         "Pokemon League Reception Gate",
-        "Victory Road",
+        "Victory Road 1F",
         "Cerulean Cave 1F"
     ],
 };

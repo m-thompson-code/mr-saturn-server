@@ -1,83 +1,69 @@
 import { PokemonLocationData } from "../../locations";
 
-export const resortGorgeous: PokemonLocationData = {
+export const tanobyRuins: PokemonLocationData = {
     catchMap: {
-        Surfing: {
-            "Tentacool": {
+        Surfing: {// Only support for gen 1 means no Mantine from LG, so just using FR
+            Tentacool: {
                 inFireRed: true,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 40,
-                rate: 65,
+                rate: 95,
             },
-            "Tentacruel": {
+            Tentacruel: {
                 inFireRed: true,
                 inLeafGreen: true,
                 minLevel: 35,
                 maxLevel: 40,
-                rate: 35,
+                rate: 5,
             },
         },
-        "Old Rod": {
+        "Old Rod": {// Using some place with similar rates since we don't support gen 2 pokemon
             Magikarp: {
-                inFireRed: true,
-                inLeafGreen: true,
+                rate: 100,
                 minLevel: 5,
                 maxLevel: 5,
-                rate: 100,
+                inFireRed: true,
+                inLeafGreen: true,
             },
         },
         "Good Rod": {
             Horsea: {
+                rate: 80,
+                minLevel: 5,
+                maxLevel: 15,
                 inFireRed: true,
                 inLeafGreen: false,
-                minLevel: 5,
-                maxLevel: 15,
-                rate: 80,
             },
             Krabby: {
+                rate: 80,
+                minLevel: 5,
+                maxLevel: 15,
                 inFireRed: false,
                 inLeafGreen: true,
-                minLevel: 5,
-                maxLevel: 15,
-                rate: 80,
             },
             Magikarp: {
-                inFireRed: true,
-                inLeafGreen: true,
+                rate: 80,
                 minLevel: 5,
                 maxLevel: 15,
-                rate: 20,
+                inFireRed: true,
+                inLeafGreen: true,
             },
         },
         "Super Rod": {
-            Shellder: {
-                inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
-            },
             Horsea: {
+                rate: 80,
+                minLevel: 15,
+                maxLevel: 20,
                 inFireRed: true,
                 inLeafGreen: false,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
             },
             Krabby: {
+                rate: 80,
+                minLevel: 5,
+                maxLevel: 15,
                 inFireRed: false,
                 inLeafGreen: true,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
-            },
-            Staryu: {
-                inFireRed: false,
-                inLeafGreen: true,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
             },
             Gyarados: {
                 inFireRed: true,
@@ -117,7 +103,7 @@ export const resortGorgeous: PokemonLocationData = {
         }
     },
     connections: [
-        "Lost Cave",
-        "Water Labyrinth",
+        "Sevault Canyon",
+        // "Tanoby Chambers",// No support for unknown yet, so losing connection
     ],
 };
