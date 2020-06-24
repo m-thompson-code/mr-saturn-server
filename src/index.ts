@@ -92,6 +92,14 @@ const botGreetingCommand = async(command: string, channel: string, context: tmi.
     console.log(`* Executed ${command} command (bot greetings)`, moment().format('LL LTS'));
 }
 
+const juggalosCommand = async(command: string, channel: string, context: tmi.ChatUserstate): Promise<void> => {
+    console.log(`* Executed ${command} command (juggalos)`, moment().format('LL LTS'));
+
+    const person = context && (context['display-name'] || context.username) || "Someone";
+
+    tmiClient.say(channel, `@${person} JUGALLOS!!!!`);
+}
+
 const botRPSCommand = async(command: string, channel: string, context: tmi.ChatUserstate): Promise<void> => {
     console.log(`* Executed ${command} command (rps)`, moment().format('LL LTS'));
 
@@ -137,8 +145,6 @@ const botRPSCommand = async(command: string, channel: string, context: tmi.ChatU
     } else {
         tmiClient.say(channel, `@${person} choose ${request}. I chose ${response}. Looks like I win!`);
     }
-
-    console.log(`* Executed ${command} command (rps)`, moment().format('LL LTS'));
 }
 
 const storeLoveQuote = async(context: tmi.ChatUserstate, msg: string): Promise<string> => {
@@ -339,7 +345,9 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
     }
 
     // If the command is known, let's execute it
-    if (parts.includes('paper') || parts.includes('rock') || parts.includes('sizzor')) {
+    if (command.includes('woop woop') || command.includes('whoop whoop')) {
+        await juggalosCommand(command, channel, context);
+    } else if (parts.includes('paper') || parts.includes('rock') || parts.includes('sizzor')) {
         await botRPSCommand(command, channel, context);
     } else if (command.includes('milk')) {
         await milkManCommand(command, channel, context);
