@@ -1,16 +1,16 @@
 import { PokemonLocationData } from "../../locations";
 
-export const fiveIsland: PokemonLocationData = {
+export const memorialPillar: PokemonLocationData = {
     catchMap: {
         Surfing: {
-            "Tentacool": {
+            Tentacool: {
                 inFireRed: true,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 40,
                 rate: 65,
             },
-            "Tentacruel": {
+            Tentacruel: {
                 inFireRed: true,
                 inLeafGreen: true,
                 minLevel: 35,
@@ -25,7 +25,7 @@ export const fiveIsland: PokemonLocationData = {
                 minLevel: 5,
                 maxLevel: 5,
                 rate: 100,
-            },
+            }
         },
         "Good Rod": {
             Horsea: {
@@ -51,13 +51,6 @@ export const fiveIsland: PokemonLocationData = {
             },
         },
         "Super Rod": {
-            Shellder: {
-                inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
-            },
             Horsea: {
                 inFireRed: true,
                 inLeafGreen: false,
@@ -66,13 +59,6 @@ export const fiveIsland: PokemonLocationData = {
                 rate: 40,
             },
             Krabby: {
-                inFireRed: false,
-                inLeafGreen: true,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
-            },
-            Staryu: {
                 inFireRed: false,
                 inLeafGreen: true,
                 minLevel: 15,
@@ -117,8 +103,7 @@ export const fiveIsland: PokemonLocationData = {
         }
     },
     connections: [
-        "Water Labyrinth",
         "Five Isle Meadow",
-        "Lost Cave",
+        "Outcast Island",
     ],
 };
