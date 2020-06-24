@@ -1,16 +1,16 @@
 import { PokemonLocationData } from "../../locations";
 
-export const oneIsland: PokemonLocationData = {
+export const resortGorgeous: PokemonLocationData = {
     catchMap: {
         Surfing: {
-            Tentacool: {
+            "Tentacool": {
                 inFireRed: true,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 40,
-                rate: 95,
+                rate: 65,
             },
-            Tentacruel: {
+            "Tentacruel": {
                 inFireRed: true,
                 inLeafGreen: true,
                 minLevel: 35,
@@ -24,8 +24,8 @@ export const oneIsland: PokemonLocationData = {
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 5,
-                rate: 5,
-            }
+                rate: 100,
+            },
         },
         "Good Rod": {
             Horsea: {
@@ -66,8 +66,8 @@ export const oneIsland: PokemonLocationData = {
                 rate: 40,
             },
             Krabby: {
-                inFireRed: true,
-                inLeafGreen: false,
+                inFireRed: false,
+                inLeafGreen: true,
                 minLevel: 15,
                 maxLevel: 25,
                 rate: 40,
@@ -117,7 +117,7 @@ export const oneIsland: PokemonLocationData = {
         }
     },
     connections: [
-        "Kindle Road",
-        "Treasure Beach",
+        "Lost Cave",
+        "Water Labyrinth",
     ],
 };

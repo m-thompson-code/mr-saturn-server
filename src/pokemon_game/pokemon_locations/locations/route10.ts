@@ -1,22 +1,45 @@
 import { PokemonLocationData } from "../../locations";
 
-export const oneIsland: PokemonLocationData = {
+export const route10: PokemonLocationData = {
     catchMap: {
+        Grass: {
+            Voltorb: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 14,
+                maxLevel: 17,
+                rate: 40,
+            },
+            Spearow: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 13,
+                maxLevel: 17,
+                rate: 35,
+            },
+            Ekans: {
+                inFireRed: true,
+                inLeafGreen: false,
+                minLevel: 11,
+                maxLevel: 17,
+                rate: 25,
+            },
+            Sandshrew: {
+                inFireRed: false,
+                inLeafGreen: true,
+                minLevel: 11,
+                maxLevel: 17,
+                rate: 25,
+            },
+        },
         Surfing: {
             Tentacool: {
                 inFireRed: true,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 40,
-                rate: 95,
-            },
-            Tentacruel: {
-                inFireRed: true,
-                inLeafGreen: true,
-                minLevel: 35,
-                maxLevel: 40,
-                rate: 5,
-            },
+                rate: 100,
+            }
         },
         "Old Rod": {
             Magikarp: {
@@ -24,23 +47,23 @@ export const oneIsland: PokemonLocationData = {
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 5,
-                rate: 5,
+                rate: 100,
             }
         },
-        "Good Rod": {
+        "Good Rod": {// Mixing versions
             Horsea: {
                 inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 5,
-                maxLevel: 15,
-                rate: 80,
-            },
-            Krabby: {
-                inFireRed: false,
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 15,
-                rate: 80,
+                rate: 40,
+            },
+            Krabby: {
+                inFireRed: true,
+                inLeafGreen: true,
+                minLevel: 5,
+                maxLevel: 15,
+                rate: 40,
             },
             Magikarp: {
                 inFireRed: true,
@@ -51,33 +74,19 @@ export const oneIsland: PokemonLocationData = {
             },
         },
         "Super Rod": {
-            Shellder: {
-                inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
-            },
             Horsea: {
                 inFireRed: true,
                 inLeafGreen: false,
                 minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
+                maxLevel: 35,
+                rate: 84,
             },
             Krabby: {
-                inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
-            },
-            Staryu: {
                 inFireRed: false,
                 inLeafGreen: true,
                 minLevel: 15,
-                maxLevel: 25,
-                rate: 40,
+                maxLevel: 35,
+                rate: 84,
             },
             Gyarados: {
                 inFireRed: true,
@@ -85,20 +94,6 @@ export const oneIsland: PokemonLocationData = {
                 minLevel: 15,
                 maxLevel: 25,
                 rate: 15,
-            },
-            Seadra: {
-                inFireRed: true,
-                inLeafGreen: false,
-                minLevel: 25,
-                maxLevel: 35,
-                rate: 4,
-            },
-            Kingler: {
-                inFireRed: false,
-                inLeafGreen: true,
-                minLevel: 25,
-                maxLevel: 35,
-                rate: 4,
             },
             Psyduck: {
                 inFireRed: true,
@@ -114,10 +109,10 @@ export const oneIsland: PokemonLocationData = {
                 maxLevel: 35,
                 rate: 1,
             },
-        }
+        },
     },
     connections: [
-        "Kindle Road",
-        "Treasure Beach",
+        "Route 9",
+        "Lavender Town",
     ],
 };

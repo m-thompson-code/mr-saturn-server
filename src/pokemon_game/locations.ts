@@ -29,15 +29,19 @@ export interface PokemonLocationData {
     connections: PokemonLocation[];
 }
 
-export type SegiiIslands = "Berry Forest" | "Bond Bridge" | "Canyon Entrance" | "Cape Brink" | "Five Island" | "Five Isle Meadow" | "Four Island" | "Green Path" | "Icefall Cave" | "Kindle Road" | "Lost Cave" | "Memorial Pillar" | "Mt. Ember" | "One Island" | "Outcast Island" | "Three Island" | "Two Island" | "Sevault Canyon" | "Seven Island" | "Six Island" | "Water Labyrinth" | "Water Path";
+export type SegiiIslands = "Berry Forest" | "Bond Bridge" | "Canyon Entrance" | "Cape Brink" | "Five Island" | "Five Isle Meadow" | "Four Island" | "Green Path" | "Icefall Cave" | "Kindle Road" | "Lost Cave" | "Memorial Pillar" | "Mt. Ember" | "One Island" | "Outcast Island" | "Resort Gorgeous" | "Three Island" | "Treasure Beach" | "Two Island" | "Sevault Canyon" | "Seven Island" | "Six Island" | "Water Labyrinth" | "Water Path";
 export type Celadon = "Celadon City" | "Celadon Condominiums" | "Mt. Moon 1F" | "Mt. Moon B1F" | "Mt. Moon B2F" | "Route 16" | "Route 3" | "Route 4" | "Route 7";
-export type Cerulean = "Cerulean Cave 1F" | "Cerulean Cave B1F" | "Cerulean Cave 2F" | "Route 24";
-export type Cinnabar = "Cinnabar Island" | "Route 20" | "Route 21";
+export type Cerulean = "Cerulean City" | "Cerulean Cave 1F" | "Cerulean Cave B1F" | "Cerulean Cave 2F" | "Route 24";
+export type Cinnabar = "Cinnabar Island" | "Pokemon Mansion 1F" | "Pokemon Mansion 2F" | "Pokemon Mansion 3F" | "Pokemon Mansion B1F" | "Route 20" | "Route 21";
 export type Fuchsia = "Fuchsia City" | "Route 15" | "Route 18" | "Route 19";// Safari Zone and Pal Park
+export type Lavender = "Lavender Town" | "Pokemon Tower 1F" | "Pokemon Tower 2F" | "Pokemon Tower 3F" | "Pokemon Tower 4F" | "Pokemon Tower 5F" | "Pokemon Tower 6F" | "Pokemon Tower 7F";
+export type Pewter = "Pewter City" | "Route 2" | "Route 3";
+export type Saffron = "Saffron City";
+export type Vermilion = "Vermilion City";
 
-export type PokemonRoutes = "Route 2" | "Route 8" | "Route 10" | "Route 11" | "Route 12" | "Route 23";
+export type PokemonRoutes = "Route 1" | "Route 2" | "Route 8" | "Route 10" | "Route 11" | "Route 12" | "Route 13" | "Route 14" | "Route 15" | "Route 16" | "Route 17" | "Route 22" | "Route 23" | "Route 24" | "Route 5" | "Route 6" | "Route 9" | "Route 25";
 
-export type PokemonLocation = "Altering Cave" | "Diglett's Cave" | "Indego Plateau" | "Lavender Town" | "Power Plant" | "Victory Road" | SegiiIslands | Celadon | Cerulean | Cinnabar | Fuchsia | PokemonRoutes;
+export type PokemonLocation = "Altering Cave" | "Diglett's Cave" | "Indego Plateau" | "Pallet Town" | "Pokemon League Reception Gate" | "Power Plant" | "Rock Tunnel 1F" | "Rock Tunnel B1F" | "Victory Road" | "Viridian City" | SegiiIslands | Celadon | Cerulean | Cinnabar | Fuchsia | Lavender | Pewter | Saffron | Vermilion | PokemonRoutes;
 
 export type PokemonLocationDataMap = {
     [location in PokemonLocation]: PokemonLocationData;
@@ -81,12 +85,14 @@ export const locationDataMap: PokemonLocationDataMap = {
     "Cerulean Cave B1F": pokemonLocations.ceruleanCaveB1F,
     "Cerulean Cave 1F": pokemonLocations.ceruleanCave1F,
     "Cerulean Cave 2F": pokemonLocations.ceruleanCave2F,
+    "Cerulean City": pokemonLocations.ceruleanCity,
     "Cinnabar Island": {
         catchMap: {
         },
         connections: [
             "Route 21",
             "Route 20",
+            "Pokemon Mansion 1F",
         ],
     },
     "Diglett's Cave": pokemonLocations.diglettsCave,
@@ -113,111 +119,53 @@ export const locationDataMap: PokemonLocationDataMap = {
     "Mt. Moon 1F": pokemonLocations.mtMoon1F,
     "Mt. Moon B1F": pokemonLocations.mtMoonB1F,
     "Mt. Moon B2F": pokemonLocations.mtMoonB2F,
-    "One Island": {
-        catchMap: {
-        },
-        connections: [
-            "Mt. Ember"
-        ],
-    },
-    "Outcast Island": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
+    "One Island": pokemonLocations.oneIsland,
+    "Outcast Island": pokemonLocations.outcastIsland,
     // "Pal Park": // TODO: what is Pal Park lol?
-    "Route 3": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
-    "Route 4": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
-    "Route 8": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
-    "Route 10": {
-        catchMap: {
-        },
-        connections: [
-            "Power Plant",
-        ],
-    },
-    "Route 11": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
-    "Route 12": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
-    "Route 15": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
-    "Route 16": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
-    "Route 18": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
-    "Route 19": {
-        catchMap: {
-        },
-        connections: [
-        ],
-    },
-    "Route 2": {
-        catchMap: {
-        },
-        connections: [],
-    },
-    "Route 20": {
-        catchMap: {
-        },
-        connections: [],
-    },
-    "Route 21": {
-        catchMap: {
-        },
-        connections: [],
-    },
-    "Route 23": {
-        catchMap: {
-        },
-        connections: [
-            "Cerulean Cave 1F",// Actually connected to Cerulean City, but in game, you have to take this route to get to Cerulean Cave
-        ],
-    },
-    "Route 24": {
-        catchMap: {
-        },
-        connections: [
-            "Cerulean Cave 1F",// Actually connected to Cerulean City, but in game, you have to take this route to get to Cerulean Cave
-        ],
-    },
-    "Route 7": {
+    "Pallet Town": pokemonLocations.palletTown,
+    "Pewter City": pokemonLocations.pewterCity,
+    "Pokemon League Reception Gate": pokemonLocations.pokemonLeagueReceptionGate,
+    "Pokemon Mansion 1F": pokemonLocations.pokemonMansion1F,
+    "Pokemon Mansion 2F": pokemonLocations.pokemonMansion2F,
+    "Pokemon Mansion 3F": pokemonLocations.pokemonMansion3F,
+    "Pokemon Mansion B1F": pokemonLocations.pokemonMansionB1F,
+    "Pokemon Tower 1F": pokemonLocations.pokemonTower1F,
+    "Pokemon Tower 2F": pokemonLocations.pokemonTower2F,
+    "Pokemon Tower 3F": pokemonLocations.pokemonTower3F,
+    "Pokemon Tower 4F": pokemonLocations.pokemonTower4F,
+    "Pokemon Tower 5F": pokemonLocations.pokemonTower5F,
+    "Pokemon Tower 6F": pokemonLocations.pokemonTower6F,
+    "Pokemon Tower 7F": pokemonLocations.pokemonTower7F,
+    "Resort Gorgeous": pokemonLocations.resortGorgeous,
+    // Pewter Museum of Science // Skipping for now
+    "Rock Tunnel 1F": pokemonLocations.rockTunnel1F,
+    "Rock Tunnel B1F": pokemonLocations.rockTunnelB1F,
+    "Route 1": pokemonLocations.route1,
+    "Route 10": pokemonLocations.route10,
+    "Route 11": pokemonLocations.route11,
+    "Route 12": pokemonLocations.route12,
+    "Route 13": pokemonLocations.route13,
+    "Route 14": pokemonLocations.route14,
+    "Route 15": pokemonLocations.route15,
+    "Route 16": pokemonLocations.route16,
+    "Route 17": pokemonLocations.route17,
+    "Route 18": pokemonLocations.route18,
+    "Route 19": pokemonLocations.route19,
+    "Route 2": pokemonLocations.route2,
+    "Route 20": pokemonLocations.route20,
+    "Route 21": pokemonLocations.route21,
+    "Route 22": pokemonLocations.route22,
+    "Route 23": pokemonLocations.route23,
+    "Route 24": pokemonLocations.route24,
+    "Route 25": pokemonLocations.route25,
+    "Route 3": pokemonLocations.route3,
+    "Route 4": pokemonLocations.route4,
+    "Route 5": pokemonLocations.route5,
+    "Route 6": pokemonLocations.route6,
+    "Route 7": pokemonLocations.route7,
+    "Route 8": pokemonLocations.route8,
+    "Route 9": pokemonLocations.route9,
+    "Saffron City": {
         catchMap: {
         },
         connections: [
@@ -248,13 +196,33 @@ export const locationDataMap: PokemonLocationDataMap = {
         connections: [
         ],
     },
+    "Treasure Beach": {
+        catchMap: {
+        },
+        connections: [
+        ],
+    },
     "Two Island": {
         catchMap: {
         },
         connections: [
         ],
     },
+    // TODO: Handle Underground Path 5-6
+    // TODO: Handle Underground Path 7-8
+    "Vermilion City": {
+        catchMap: {
+        },
+        connections: [
+        ],
+    },
     "Victory Road": {
+        catchMap: {
+        },
+        connections: [
+        ],
+    },
+    "Viridian City": {
         catchMap: {
         },
         connections: [

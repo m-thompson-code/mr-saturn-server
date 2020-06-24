@@ -1,6 +1,6 @@
 import { PokemonLocationData } from "../../locations";
 
-export const oneIsland: PokemonLocationData = {
+export const outcastIsland: PokemonLocationData = {
     catchMap: {
         Surfing: {
             Tentacool: {
@@ -24,7 +24,7 @@ export const oneIsland: PokemonLocationData = {
                 inLeafGreen: true,
                 minLevel: 5,
                 maxLevel: 5,
-                rate: 5,
+                rate: 100,
             }
         },
         "Good Rod": {
@@ -38,8 +38,8 @@ export const oneIsland: PokemonLocationData = {
             Krabby: {
                 inFireRed: false,
                 inLeafGreen: true,
-                minLevel: 5,
-                maxLevel: 15,
+                minLevel: 15,
+                maxLevel: 5,
                 rate: 80,
             },
             Magikarp: {
@@ -117,7 +117,7 @@ export const oneIsland: PokemonLocationData = {
         }
     },
     connections: [
-        "Kindle Road",
-        "Treasure Beach",
+        "Altering Cave",
+        "Green Path",
     ],
 };
