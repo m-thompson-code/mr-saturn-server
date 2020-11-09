@@ -1,10 +1,14 @@
 console.log("Running Mr Saturn server");
 
-console.log("Fuck you glitch, you aren't getting my changes");
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+console.log(process.env.firebaseEmail);
+console.log(process.env.firebasePassword);
+console.log(process.env.twitchBotUsername);
+console.log(process.env.twitchOAuthToken);
 
 import * as tmi from 'tmi.js';
-
-import { twitchCerts } from './secrets/secrets';
 
 import { firebaseInit } from './firebase/firebase';
 import { CHANNEL_NAMES } from './configs/configs';
@@ -20,11 +24,12 @@ if (typeof _channel_names === 'string') {
     _channel_names = _channel_names.split(',');
 }
 
+
 // Create a client with using the twitchCerts from secrets and CHANNEL_NAMES from configs
 const tmiClient = tmi.client({
     identity: {
-        username: twitchCerts?.BOT_USERNAME || process.env.BOT_USERNAME || process.env.twitchBotUsername,
-        password: twitchCerts?.OAUTH_TOKEN || process.env.OAUTH_TOKEN || process.env.twitchOAuthToken,
+        username: process.env.BOT_USERNAME || process.env.twitchBotUsername,
+        password: process.env.OAUTH_TOKEN || process.env.twitchOAuthToken,
     },
     channels: _channel_names,
 });

@@ -2,9 +2,6 @@
   "name": "mr-saturn-server",
   "version": "1.0.0",
   "description": "The backend for the Mr Saturn project",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "jsnext:main": "dist/index.js",
   "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
   "files": [
@@ -14,7 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf app && tsc -p tsconfig.json",
     "exe": "node app/dist/index.js",
-    "start": "npm run build && npm run exe"
+    "start": "npm run build && npm run exe",
+    "local": "node local.js && npm run start"
   },
   "author": "moomoomamoo",
   "license": "ISC",
@@ -25,6 +23,7 @@
   },
   "devDependencies": {
     "@types/tmi.js": "^1.4.0",
+    "dotenv": "^8.2.0",
     "rimraf": "^3.0.2",
     "typescript": "^3.8.3"
   }

@@ -4,6 +4,9 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyDkY3b-5WGgLcEPK7s9L65if7-svTW2was",
@@ -16,11 +19,12 @@ const firebaseConfig = {
     measurementId: "G-282RBMWF9D"
 };
 
-import { firebaseCerts } from "../secrets/secrets";
-
 const _signIn = async(): Promise<void> => {
     try {
-        await firebase.auth().signInWithEmailAndPassword(firebaseCerts?.email || process.env.email || process.env.firebaseEmail || '', firebaseCerts?.password || process.env.password || process.env.firebasePassword || '');
+        const email = process.env.email || process.env.firebaseEmail || '';
+        const password = process.env.password || process.env.firebasePassword || '';
+        console.log(email, password);
+        await firebase.auth().signInWithEmailAndPassword(email, password);
     }catch(error) {
         console.error(error && error.message || error);
         throw error;

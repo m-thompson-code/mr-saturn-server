@@ -4,6 +4,7 @@
 /secrets
 /src/secrets
 /src/secrets/secrets.ts
+.env
 
 # Firebase hosting cache files
 .firebase/*
