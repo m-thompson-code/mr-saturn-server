@@ -164,7 +164,9 @@ const storeLoveQuote = async(context: tmi.ChatUserstate, msg: string): Promise<s
 
 const getRandomLoveQuote = async(rand?: string): Promise<{id: string, quote: string} | undefined> => {
     const _rand = rand || getRand();
-    console.log(' ~ love seed', rand, '->', _rand);
+    if (rand) {
+        console.log(' ~ love seed', rand, '->', _rand);
+    }
 
     const _querySnapshot_1 = await firestore().collection("love").where("rand", ">=", _rand).get();
     if (_querySnapshot_1 && _querySnapshot_1.size) {
