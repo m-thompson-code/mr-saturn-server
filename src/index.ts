@@ -3,11 +3,6 @@ console.log("Running Mr Saturn server");
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-console.log(process.env.firebaseEmail);
-console.log(process.env.firebasePassword);
-console.log(process.env.twitchBotUsername);
-console.log(process.env.twitchOAuthToken);
-
 import * as tmi from 'tmi.js';
 
 import { firebaseInit } from './firebase/firebase';
