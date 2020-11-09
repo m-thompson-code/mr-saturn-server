@@ -20,7 +20,7 @@ import { firebaseCerts } from "../secrets/secrets";
 
 const _signIn = async(): Promise<void> => {
     try {
-        await firebase.auth().signInWithEmailAndPassword(firebaseCerts?.email || process.env.email || '', firebaseCerts?.password || process.env.password || '');
+        await firebase.auth().signInWithEmailAndPassword(firebaseCerts?.email || process.env.email || process.env.firebaseEmail || '', firebaseCerts?.password || process.env.password || process.env.firebasePassword || '');
     }catch(error) {
         console.error(error && error.message || error);
         throw error;

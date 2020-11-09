@@ -23,8 +23,8 @@ if (typeof _channel_names === 'string') {
 // Create a client with using the twitchCerts from secrets and CHANNEL_NAMES from configs
 const tmiClient = tmi.client({
     identity: {
-        username: twitchCerts?.BOT_USERNAME || process.env.BOT_USERNAME,
-        password: twitchCerts?.OAUTH_TOKEN || process.env.OAUTH_TOKEN,
+        username: twitchCerts?.BOT_USERNAME || process.env.BOT_USERNAME || process.env.twitchBotUsername,
+        password: twitchCerts?.OAUTH_TOKEN || process.env.OAUTH_TOKEN || process.env.twitchOAuthToken,
     },
     channels: _channel_names,
 });
