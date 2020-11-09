@@ -12,8 +12,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf dist && tsc -p tsconfig.json",
-    "exe": "node dist/index.js",
+    "build": "rimraf app && tsc -p tsconfig.json",
+    "exe": "node app/dist/index.js",
     "start": "npm run build && npm run exe"
   },
   "author": "moomoomamoo",
