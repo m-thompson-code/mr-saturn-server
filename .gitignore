@@ -10,7 +10,7 @@
 /.firebase
 
 # compiled output
-/dist
+/app
 /es
 /cjs
 /tmp
