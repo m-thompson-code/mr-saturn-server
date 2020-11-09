@@ -1,5 +1,7 @@
 console.log("Running Mr Saturn server");
 
+console.log("Fuck you glitch, you aren't getting my changes");
+
 import * as tmi from 'tmi.js';
 
 import { twitchCerts } from './secrets/secrets';
