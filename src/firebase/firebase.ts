@@ -23,7 +23,7 @@ const _signIn = async(): Promise<void> => {
     try {
         const email = process.env.email || process.env.firebaseEmail || '';
         const password = process.env.password || process.env.firebasePassword || '';
-        console.log(email, password);
+        
         await firebase.auth().signInWithEmailAndPassword(email, password);
     }catch(error) {
         console.error(error && error.message || error);
