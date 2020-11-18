@@ -1,5 +1,7 @@
 console.log("Running Mr Saturn server");
 
+import axios from 'axios';
+
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -12,6 +14,7 @@ import * as moment from 'moment';
 
 import { firestore } from "firebase/app";
 import { getRand, substringsMatch, commandHasGreeting } from './helpers/helpers';
+import { runPingServer } from './ping';
 
 let _channel_names = CHANNEL_NAMES || process.env.CHANNEL_NAMES;
 
@@ -441,3 +444,18 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
 }
 
 main();
+
+runPingServer();
+
+// Keep the server alive on glitch
+const pingUrl = "https://m-thompson-code-mr-saturn-server.glitch.me/ping";
+
+setInterval(() => {
+    console.log(`ping: ${pingUrl}`)
+    return axios.get(pingUrl).then(_res => {
+        console.log(_res);
+    }).catch(error => {
+        // silence
+        console.error(error);
+    });
+}, 1000 * 60 * 5);
