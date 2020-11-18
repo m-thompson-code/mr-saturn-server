@@ -23,7 +23,7 @@ export const runPingServer = () => {
         const address = listener.address();
 
         if (typeof address !== 'string') {
-            port = address.port;
+            port = address?.port || "Unknown";
         } else {
             port = address;
         }
