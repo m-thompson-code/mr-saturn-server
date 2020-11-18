@@ -451,11 +451,13 @@ runPingServer();
 const pingUrl = "https://m-thompson-code-mr-saturn-server.glitch.me/ping";
 
 setInterval(() => {
-    console.log(`ping: ${pingUrl}`)
+    console.log(`ping: ${pingUrl} - PENDING . . .`)
     return axios.get(pingUrl).then(_res => {
-        console.log(_res);
+        console.log(`ping: ${pingUrl} - SUCCESS`);
+
     }).catch(error => {
         // silence
         console.error(error);
+        console.error(`ping: ${pingUrl} - ERROR`);
     });
 }, 1000 * 60 * 5);
