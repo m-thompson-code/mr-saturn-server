@@ -33,6 +33,8 @@ const tmiClient = tmi.client({
 
 let state: 'disconnected' | 'error' | 'connected' = 'disconnected';
 
+let periodicPromptTimeout: any;
+
 const main = async(): Promise<void> => {
     // Inintalize Firebase and import any services we want (firestore, auth)
     await firebaseInit();
@@ -51,7 +53,9 @@ const main = async(): Promise<void> => {
     // Register our on message event handler
     tmiClient.on('message', onMessageHandler);
 
-    setTimeout(() => {
+    clearTimeout(periodicPromptTimeout);
+
+    periodicPromptTimeout = setTimeout(() => {
         periodicPrompt();
     }, 30 * 1000 * 60);
 
@@ -249,11 +253,13 @@ const periodicPrompt = (): void => {
         const channel = split[split.length - 1];
 
         tmiClient.say(channel, `Hey chat! Teach me what love is by typing "Love is <insert the rest of the quote>". What is love?`);
-
-        console.log(`* Executed periodicPrompt ~`, moment().format('LL LTS'));
     }
 
-    setTimeout(() => {
+    console.log(`* Executed periodicPrompt ~`, moment().format('LL LTS'));
+
+    clearTimeout(periodicPromptTimeout);
+
+    periodicPromptTimeout = setTimeout(() => {
         periodicPrompt();
     }, 30 * 1000 * 60 + Math.random() * 30 * 1000 * 60);
 }
@@ -470,11 +476,15 @@ const getClientStateIsStable = () => {
     return false;
 }
 
+let pingInterval: any;
+
 const ping = () => {
     // Keep the server alive on glitch
     const pingUrl = "https://m-thompson-code-mr-saturn-server.glitch.me/ping";
 
-    setInterval(() => {
+    clearInterval(pingInterval);
+
+    pingInterval = setInterval(() => {
         // console.log(`ping: ${pingUrl} - PENDING . . .`);
 
         axios.get(pingUrl).then(_res => {
