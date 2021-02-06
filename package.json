@@ -4,33 +4,35 @@
   "description": "The backend for the Mr Saturn project",
   "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
+  "main": "app/dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf app && tsc -p tsconfig.json",
-    "exe": "node app/dist/index.js",
-    "start": "npm run build && npm run exe",
+    "serve": "node app/dist/index.js",
+    "start": "npm run build && npm run serve",
     "local": "node local.js && npm run start"
   },
   "author": "moomoomamoo",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m-thompson-code/mr-saturn-server.git"
+  },
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "firebase": "^7.12.0",
-    "moment": "^2.24.0",
+    "firebase": "^8.2.6",
+    "moment": "^2.29.1",
     "tmi.js": "^1.7.1"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",
-    "@types/cors": "^2.8.8",
+    "@types/cors": "^2.8.9",
     "@types/tmi.js": "^1.7.1",
     "dotenv": "^8.2.0",
     "rimraf": "^3.0.2",
-    "typescript": "^3.8.3"
+    "typescript": "^4.1.3"
   }
 }

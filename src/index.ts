@@ -7,12 +7,12 @@ dotenv.config();
 
 import * as tmi from 'tmi.js';
 
-import { firebaseInit } from './firebase/firebase';
+import { firebaseInit, firestore } from './firebase/firebase';
+
 import { CHANNEL_NAMES } from './configs/configs';
 
 import * as moment from 'moment';
 
-import { firestore } from "firebase/app";
 import { getRand, substringsMatch, commandHasGreeting } from './helpers/helpers';
 import { runPingServer } from './ping';
 

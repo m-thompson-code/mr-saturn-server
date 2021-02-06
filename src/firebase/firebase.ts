@@ -1,4 +1,4 @@
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 
 // Add the Firebase services that you want to use
 import "firebase/auth";
@@ -38,5 +38,7 @@ const _firebaseInit = async(): Promise<void> => {
     // Sign in using secret certs
     return _signIn();
 }
+
+export const firestore = firebase.firestore;
 
 export const firebaseInit = _firebaseInit;
