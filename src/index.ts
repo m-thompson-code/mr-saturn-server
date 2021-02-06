@@ -22,7 +22,6 @@ if (typeof _channel_names === 'string') {
     _channel_names = _channel_names.split(',');
 }
 
-
 // Create a client with using the twitchCerts from secrets and CHANNEL_NAMES from configs
 const tmiClient = tmi.client({
     identity: {
@@ -32,6 +31,8 @@ const tmiClient = tmi.client({
     channels: _channel_names,
 });
 
+let state: 'disconnected' | 'error' | 'connected' = 'disconnected';
+
 const main = async(): Promise<void> => {
     // Inintalize Firebase and import any services we want (firestore, auth)
     await firebaseInit();
@@ -39,6 +40,12 @@ const main = async(): Promise<void> => {
     // Display when connected
     tmiClient.on('connected', (addr: string, port: number): void => {
         console.log(`* Connected to ${addr}:${port}`, moment().format('LL LTS'));
+        state = 'connected';
+    });
+
+    tmiClient.on('disconnected', (reason: string): void => {
+        console.error(reason);
+        state = 'disconnected';
     });
 
     // Register our on message event handler
@@ -443,21 +450,51 @@ const onMessageHandler: (channel: string, context: tmi.ChatUserstate, rawMsg: st
     }
 }
 
-main();
+main().catch(error => {
+    console.error(error);
+    
+    state = 'error';
+});
 
 runPingServer();
 
-// Keep the server alive on glitch
-const pingUrl = "https://m-thompson-code-mr-saturn-server.glitch.me/ping";
+const getClientStateIsStable = () => {
+    const _state = tmiClient.readyState();
 
-setInterval(() => {
-    console.log(`ping: ${pingUrl} - PENDING . . .`)
-    return axios.get(pingUrl).then(_res => {
-        console.log(`ping: ${pingUrl} - SUCCESS`);
+    if (_state === 'OPEN' || _state === 'CONNECTING') {
+        return true;
+    } else if (state === 'connected') {
+        return true;
+    }
 
-    }).catch(error => {
-        // silence
-        console.error(error);
-        console.error(`ping: ${pingUrl} - ERROR`);
-    });
-}, 1000 * 60 * 5);
+    return false;
+}
+
+const ping = () => {
+    // Keep the server alive on glitch
+    const pingUrl = "https://m-thompson-code-mr-saturn-server.glitch.me/ping";
+
+    setInterval(() => {
+        // console.log(`ping: ${pingUrl} - PENDING . . .`);
+
+        axios.get(pingUrl).then(_res => {
+            console.log(`ping: ${pingUrl} - SUCCESS`, moment().format('LL LTS'));
+        }).catch(error => {
+            // silence
+            console.error(error);
+            console.error(`ping: ${pingUrl} - ERROR`, moment().format('LL LTS'));
+        });
+
+        if (!getClientStateIsStable()) {
+            console.error("Detected tmi client is not running -> calling main()");
+            main();
+        }
+    }, 1000 * 60 * 5);
+}
+
+try {
+    ping();
+} catch(error) {
+    console.error(error);
+    ping();
+}
