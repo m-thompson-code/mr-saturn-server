@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.9",
+    "@types/express": "^4.17.11",
     "@types/tmi.js": "^1.7.1",
     "dotenv": "^8.2.0",
     "rimraf": "^3.0.2",
